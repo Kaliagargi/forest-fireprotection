@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Forest Fire Prediction</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      text-align: center;
+      padding: 40px;
+    }
+    h2 {
+      color: #333;
+    }
+    form {
+      background-color: white;
+      display: inline-block;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      margin-top: 30px;
+    }
+    input {
+      padding: 10px;
+      margin: 12px 0;
+      width: 250px;
+      font-size: 16px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    label {
+      font-size: 15px;
+      display: block;
+      margin-top: 10px;
+      color: #555;
+    }
+    .btn {
+      margin-top: 20px;
+      padding: 12px 25px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      background-color: #007BFF;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .btn:hover {
+      background-color: #0056b3;
+    }
+    .result {
+      margin-top: 30px;
+      font-size: 20px;
+      font-weight: bold;
+      color: #d9534f;
+    }
+    .safe {
+      color: #28a745;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Forest Fire Prediction</h2>
+
+  <form method="POST">
+    <label for="temperature">🌡️ Temperature (°C):</label>
+    <input type="number" step="any" name="temperature" id="temperature" required>
+
+    <label for="humidity">💧 Humidity (%):</label>
+    <input type="number" step="any" name="humidity" id="humidity" required>
+
+    <label for="wind">💨 Wind Speed (km/h):</label>
+    <input type="number" step="any" name="wind" id="wind" required>
+
+    <label for="rain">🌧️ Rain (mm):</label>
+    <input type="number" step="any" name="rain" id="rain" required>
+
+    <br>
+    <button type="submit" class="btn">Predict</button>
+  </form>
+
+  {% if result %}
+    <div class="result {% if 'No' in result %}safe{% endif %}">
+      🔍 Result: {{ result }}
+    </div>
+  {% endif %}
+
+</body>
+</html>

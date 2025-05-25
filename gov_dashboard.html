@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Government Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      background-color: #f5f5f5;
+      color: #333;
+    }
+
+    .container {
+      background-color: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      max-width: 800px;
+      margin: auto;
+    }
+
+    h2 {
+      color: #2c3e50;
+    }
+
+    .alert-message {
+      margin-top: 20px;
+      font-size: 18px;
+      padding: 15px;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+
+    .fire-alert {
+      color: white;
+      background-color: #e74c3c;
+    }
+
+    .no-alert {
+      color: #2ecc71;
+      background-color: #ecf9f1;
+    }
+
+    .status, .weather, .history {
+      margin-top: 20px;
+    }
+
+    .weather p {
+      margin: 5px 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    table, th, td {
+      border: 1px solid #ccc;
+    }
+
+    th, td {
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Welcome, Government Official!</h2>
+    <p>This dashboard monitors forest fire risks in real time.</p>
+
+    {% if fire_alert %}
+      <div class="alert-message fire-alert">
+        🚨 Forest Fire Alert: Immediate Action Required!
+      </div>
+    {% else %}
+      <div class="alert-message no-alert">
+        ✅ No current fire alerts.
+      </div>
+    {% endif %}
+
+    <div class="status">
+      <strong>Status:</strong> {{ prediction_status }}
+    </div>
+
+    {% if weather %}
+    <div class="weather">
+      <h3>🌦 Current Weather in Lisbon</h3>
+      <p><strong>Temperature:</strong> {{ weather.temperature }} °C</p>
+      <p><strong>Humidity:</strong> {{ weather.humidity }} %</p>
+      <p><strong>Wind Speed:</strong> {{ weather.wind }} m/s</p>
+      <p><strong>Rain (last 1h):</strong> {{ weather.rain }} mm</p>
+    </div>
+    {% endif %}
+
+    <div class="history">
+      <h3>📜 Prediction History</h3>
+      <table>
+        <tr>
+          <th>Timestamp</th>
+          <th>Prediction</th>
+          <th>Temperature</th>
+          <th>Humidity</th>
+          <th>Wind</th>
+          <th>Rain</th>
+        </tr>
+        {% for record in history|reverse %}
+        <tr>
+          <td>{{ record.timestamp }}</td>
+          <td>{{ record.prediction }}</td>
+          <td>{{ record.weather.temperature }} °C</td>
+          <td>{{ record.weather.humidity }} %</td>
+          <td>{{ record.weather.wind }} m/s</td>
+          <td>{{ record.weather.rain }} mm</td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+  </div>
+</body>
+</html>

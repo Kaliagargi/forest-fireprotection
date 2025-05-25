@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sign Up</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      text-align: center;
+      padding-top: 50px;
+    }
+    .btn {
+      padding: 12px 25px;
+      font-size: 16px;
+      margin: 20px;
+      cursor: pointer;
+      border: none;
+      border-radius: 8px;
+      background-color: #007BFF;
+      color: white;
+    }
+    .form-box {
+      margin-top: 30px;
+      display: none;
+    }
+    input {
+      padding: 10px;
+      margin: 8px;
+      width: 200px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Sign Up</h1>
+
+  <button class="btn" onclick="showUserForm()">User</button>
+  <button class="btn" onclick="showGovForm()">Government</button>
+
+  <div id="userForm" class="form-box">
+    <form action="/user_signup" method="POST">
+      <button type="submit" class="btn">Continue</button>
+    </form>
+  </div>
+
+  <div id="govForm" class="form-box">
+    <h2>Government Login</h2>
+    <form action="/gov_login" method="POST">
+      <input type="text" name="gov_id" placeholder="Government ID" required><br>
+      <input type="password" name="password" placeholder="Password" required><br>
+      <button type="submit" class="btn">Login</button>
+    </form>
+  </div>
+
+  <script>
+    function showUserForm() {
+      document.getElementById("userForm").style.display = "block";
+      document.getElementById("govForm").style.display = "none";
+    }
+
+    function showGovForm() {
+      document.getElementById("govForm").style.display = "block";
+      document.getElementById("userForm").style.display = "none";
+    }
+  </script>
+
+</body>
+</html>
